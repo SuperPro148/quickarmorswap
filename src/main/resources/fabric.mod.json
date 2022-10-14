@@ -13,7 +13,7 @@
     "sources": "https://github.com/SuperPro148/quickarmorswap/"
   },
 
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "icon": "assets/quickarmorswap/icon.png",
 
   "environment": "*",
