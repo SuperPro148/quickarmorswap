@@ -19,7 +19,6 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.superpro148.quickarmorswap.QuickArmorSwap"
     ],
     "modmenu": [
       "io.github.superpro148.quickarmorswap.ModMenuIntegration"
