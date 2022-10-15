@@ -16,9 +16,13 @@
   "license": "GPL-3.0-only",
   "icon": "assets/quickarmorswap/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
+    "client": [
+      "io.github.superpro148.quickarmorswap.QuickArmorSwap"
+    ],
+    "modmenu": [
+      "io.github.superpro148.quickarmorswap.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -32,6 +36,7 @@
     "fabric-api": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "yet-another-config-lib": "*",
+    "modmenu": "*"
   }
 }
