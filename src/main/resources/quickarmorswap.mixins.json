@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "ArmorSwapMixin"
+    "ArmorSwapMixin",
+    "ElytraSwapMixin"
   ],
   "injectors": {
     "defaultRequire": 1

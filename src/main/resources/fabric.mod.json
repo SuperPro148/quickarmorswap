@@ -19,6 +19,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
+
     ],
     "modmenu": [
       "io.github.superpro148.quickarmorswap.ModMenuIntegration"
