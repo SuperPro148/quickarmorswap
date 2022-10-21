@@ -33,4 +33,8 @@ public class DropConfig {
                 .build()
                 .generateScreen(parent);
     }
+
+    public static void toggle() {
+        DROP_INSTEAD_OF_SWAP = !DROP_INSTEAD_OF_SWAP;
+    }
 }
