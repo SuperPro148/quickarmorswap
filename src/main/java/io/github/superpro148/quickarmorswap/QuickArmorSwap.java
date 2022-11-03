@@ -1,9 +1,12 @@
 package io.github.superpro148.quickarmorswap;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
@@ -17,6 +20,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class QuickArmorSwap implements ClientModInitializer {
     public static void dropArmor(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
@@ -67,6 +74,15 @@ public class QuickArmorSwap implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        try {
+            File configFile = new File(FabricLoader.getInstance().getConfigDir().toString() + "/quickarmorswap.json");
+            Scanner configReader = new Scanner(configFile);
+            JsonObject configJSON = (JsonObject) JsonParser.parseString(configReader.nextLine());
+            DropConfig.DROP_INSTEAD_OF_SWAP = configJSON.get("drop_instead_of_swap").getAsBoolean();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            DropConfig.DROP_INSTEAD_OF_SWAP = false;
+        }
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(ClientCommandManager.literal("quickarmorswap").executes(context -> {
                 DropConfig.toggle();

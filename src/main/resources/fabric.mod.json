@@ -9,8 +9,9 @@
     "SuperPro148"
   ],
   "contact": {
-    "homepage": "https://SuperPro148.github.io/",
-    "sources": "https://github.com/SuperPro148/quickarmorswap/"
+    "homepage": "https://SuperPro148.github.io/pages/mcmods.html",
+    "sources": "https://github.com/SuperPro148/quickarmorswap/",
+    "issues": "https://github.com/SuperPro148/quickarmorswap/issues"
   },
 
   "license": "GPL-3.0-only",
