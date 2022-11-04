@@ -74,18 +74,11 @@ public class QuickArmorSwap implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        try {
-            File configFile = new File(FabricLoader.getInstance().getConfigDir().toString() + "/quickarmorswap.json");
-            Scanner configReader = new Scanner(configFile);
-            JsonObject configJSON = (JsonObject) JsonParser.parseString(configReader.nextLine());
-            DropConfig.DROP_INSTEAD_OF_SWAP = configJSON.get("drop_instead_of_swap").getAsBoolean();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            DropConfig.DROP_INSTEAD_OF_SWAP = false;
-        }
+        DropConfig.DROP_INSTEAD_OF_SWAP = DropConfig.readConfigFile();
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(ClientCommandManager.literal("quickarmorswap").executes(context -> {
                 DropConfig.toggle();
+                DropConfig.updateConfigFile();
                 String configValue = DropConfig.DROP_INSTEAD_OF_SWAP ? "DROP" : "SWAP";
                 context.getSource().sendFeedback(Text.of("armor will now: " + configValue));
                 return 1;

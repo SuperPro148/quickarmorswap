@@ -1,6 +1,7 @@
 package io.github.superpro148.quickarmorswap;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import dev.isxander.yacl.api.ConfigCategory;
 import dev.isxander.yacl.api.Option;
 import dev.isxander.yacl.api.YetAnotherConfigLib;
@@ -10,22 +11,16 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class DropConfig {
     public static boolean DROP_INSTEAD_OF_SWAP;
 
     public static void save() {
-        try {
-            FileWriter writer = new FileWriter(FabricLoader.getInstance().getConfigDir().toString() + "/quickarmorswap.json");
-            JsonObject configJSON = new JsonObject();
-            configJSON.addProperty("drop_instead_of_swap", DROP_INSTEAD_OF_SWAP);
-            writer.write(configJSON.toString());
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        updateConfigFile();
     }
 
     public static Screen createGui(Screen parent) {
@@ -53,4 +48,30 @@ public class DropConfig {
     public static void toggle() {
         DROP_INSTEAD_OF_SWAP = !DROP_INSTEAD_OF_SWAP;
     }
-}
+
+    public static void updateConfigFile() {
+        try {
+            FileWriter writer = new FileWriter(FabricLoader.getInstance().getConfigDir().toString() + "/quickarmorswap.json");
+            JsonObject configJSON = new JsonObject();
+            configJSON.addProperty("drop_instead_of_swap", DROP_INSTEAD_OF_SWAP);
+            writer.write(configJSON.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static boolean readConfigFile() {
+        try {
+            File configFile = new File(FabricLoader.getInstance().getConfigDir().toString() + "/quickarmorswap.json");
+            Scanner configReader = new Scanner(configFile);
+            JsonObject configJSON = (JsonObject) JsonParser.parseString(configReader.nextLine());
+            return configJSON.get("drop_instead_of_swap").getAsBoolean();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            DROP_INSTEAD_OF_SWAP = false;
+            updateConfigFile();
+            return false;
+        }
+    }
+ }
