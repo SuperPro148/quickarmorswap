@@ -1,12 +1,10 @@
 package io.github.superpro148.quickarmorswap;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import io.github.superpro148.quickarmorswap.config.QuickArmorSwapConfig;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
@@ -20,10 +18,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class QuickArmorSwap implements ClientModInitializer {
     public static void dropArmor(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
@@ -74,15 +68,6 @@ public class QuickArmorSwap implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        DropConfig.DROP_INSTEAD_OF_SWAP = DropConfig.readConfigFile();
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            dispatcher.register(ClientCommandManager.literal("quickarmorswap").executes(context -> {
-                DropConfig.toggle();
-                DropConfig.updateConfigFile();
-                String configValue = DropConfig.DROP_INSTEAD_OF_SWAP ? "DROP" : "SWAP";
-                context.getSource().sendFeedback(Text.of("armor will now: " + configValue));
-                return 1;
-            }));
-        });
+        QuickArmorSwapConfig.CONFIG_LIST.readConfig();
     }
 }

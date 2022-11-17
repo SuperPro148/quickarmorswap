@@ -1,6 +1,6 @@
 package io.github.superpro148.quickarmorswap.mixin;
 
-import io.github.superpro148.quickarmorswap.DropConfig;
+import io.github.superpro148.quickarmorswap.config.QuickArmorSwapConfig;
 import io.github.superpro148.quickarmorswap.QuickArmorSwap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
@@ -25,10 +25,11 @@ public class ArmorSwapMixin {
             cancellable = true
     )
     public void quickarmorswap$swapArmor(World world, @NotNull PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (DropConfig.DROP_INSTEAD_OF_SWAP) {
-            QuickArmorSwap.dropArmor(world, user, hand, cir);
-        } else {
-            QuickArmorSwap.swapArmor(world, user, hand, cir);
+        if (QuickArmorSwapConfig.ENABLE.getValue()) {
+            switch (QuickArmorSwapConfig.MODE.getValue()) {
+                case SWAP -> QuickArmorSwap.swapArmor(world, user, hand, cir);
+                case DROP -> QuickArmorSwap.dropArmor(world, user, hand, cir);
+            }
         }
     }
 }

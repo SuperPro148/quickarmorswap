@@ -1,0 +1,8 @@
+{
+  "option.quickarmorswap.enable": "Enable",
+  "tooltip.quickarmorswap.enable": "Enables the mod",
+  "option.quickarmorswap.mode": "Mode",
+  "tooltip.quickarmorswap.mode": "Whether the armor item drops or swaps",
+  "enum.quickarmorswap.mode_swap": "Swap",
+  "enum.quickarmorswap.mode_drop": "Drop"
+}
