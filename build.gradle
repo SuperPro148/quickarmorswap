@@ -40,9 +40,9 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "dev.isxander:yet-another-config-lib:1.5.0"
-	modImplementation "com.terraformersmc:modmenu:4.0.6"
-	modImplementation "maven.modrinth:configlib148:1.0.0"
+	modImplementation "dev.isxander:yet-another-config-lib:2.2.0"
+	modImplementation "com.terraformersmc:modmenu:5.0.2"
+	modImplementation "maven.modrinth:configlib148:1.2.0"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"

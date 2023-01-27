@@ -4,7 +4,7 @@ import dev.isxander.yacl.api.ConfigCategory;
 import dev.isxander.yacl.api.Option;
 import dev.isxander.yacl.api.YetAnotherConfigLib;
 import dev.isxander.yacl.gui.controllers.BooleanController;
-import dev.isxander.yacl.gui.controllers.EnumController;
+import dev.isxander.yacl.gui.controllers.cycling.EnumController;
 import io.github.superpro148.configlib148.ConfigList;
 import io.github.superpro148.configlib148.ConfigOption;
 import net.minecraft.client.gui.screen.Screen;
