@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,7 +23,7 @@ public class ElytraSwapMixin {
             ),
             cancellable = true
     )
-    public void quickarmorswap$swapElytra(World world, @NotNull PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    public void quickarmorswap$swapElytra(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (QuickArmorSwapConfig.ENABLE.getValue()) {
             switch (QuickArmorSwapConfig.MODE.getValue()) {
                 case SWAP -> QuickArmorSwap.swapArmor(world, user, hand, cir);
